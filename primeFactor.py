@@ -1,4 +1,5 @@
-# Prime Number Factorizer
+#!usr/bin/env python3
+# Prime Number Factorizer, written in Python 3.3
 # A simple Prime Number factorization program, by Cryptoricist (March 22, 2014)
 # This program checks whether the positive integer entered
 # is prime or composite, using the modulus method. It is also unique
