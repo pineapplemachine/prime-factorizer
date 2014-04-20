@@ -1,6 +1,6 @@
 prime-factorizer
 ================
 
-
-A simple prime factorization script in base-10, useful for number theory and cryptography.
+A simple primality checker using a naïve implementation.
 Created by Cryptoricist (March 22, 2014)
+Modified by Sophie Kirschner (April 20, 2014)

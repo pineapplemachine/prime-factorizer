@@ -1,9 +1,9 @@
 #!usr/bin/env python3
 # Prime Number Factorizer, written in Python 3.3
 # A simple Prime Number factorization program, by Cryptoricist (March 22, 2014)
-# This program checks whether the positive integer entered
-# is prime or composite, using the modulus method. It is also unique
-# in that it lists all of its attempts at factorizing along the way.
+# Modified by Sophie Kirschner (April 20, 2014)
+# This program checks whether the positive integer entered is prime.
+# The pertinent method returns the reason for its being composite, if one exists.
 
 def userIn():
     # User Input Validation -- tests if the datatype is INT.
@@ -14,31 +14,39 @@ def userIn():
         except EOFError:
             raise SystemExit('Terminating program...')
         except:
-            print('Invalid integer. Please enter an integer.')
+            print('Invalid integer. Please enter an integer.\n')
 
-def primeTest(n):
-    attempt = 0
-    for i in range(2, n):
-        test = n % i
-        attempt += 1
-        print('Attempting to factor', i, 'from', n, '...')
-        if test == 0:
-            return 'is COMPOSITE by factor of {0}.\n[{1} Attempt(s)]'.format(i, attempt)
-        elif (i == (n - 1)):
-            return 'is PRIME.'
+def primeTest(number):
+    # check if primality can be defined for this number
+    if int(number)!=number:
+        return 'Primality not defined for this number. (Not an integer.)'
+    if number<2:
+        return 'Primality not defined for this number. (Less than 2.)'
+    # test for mod 2 and mod 3
+    if (number%2==0):
+        return 'Number is composite. (Multiple of 2.)'
+    if (number%3==0):
+        return 'Number is composite. (Multiple of 3.)'
+    # iterate through possible prime factors up to sqrt(number)
+    goal=int(number**0.5)
+    i=5
+    while (i<=goal):
+        # check if i is a factor
+        if (number%i==0):
+            return 'Number is composite. (Multiple of '+str(i)+'.)'
+        # check if i+2 is a factor
+        if (number%(i+2)==0):
+            return 'Number is composite. (Multiple of '+str(i+2)+'.)'
+        # go on to the next pair of numbers
+        i+=6
+    return 'Number is prime. (Found no factors.)'
 
 def main():
-    print('===PRIME NUMBER TEST===\n This program is used to \
-test whether a number N is prime or composite. It also lists all\
-factorizing attempts in its algorithm. (Ctrl-D or Ctrl-Z to end program)')
-    n = userIn()
-    if n < abs(3) and n > 0:
-        print(n, 'is PRIME.')
-    elif n == 0:
-        print(n, 'is NOT PRIME.')
-    else:
-        isPrime = primeTest(n)
-        print(n, isPrime)
+    print('===PRIME NUMBER TEST===\nThis program tests whether a number N is prime.\n')
+    while True:
+        n = userIn()
+        isPrime=primeTest(n)
+        print(n, ":", isPrime, "\n")
     
 
 if __name__=='__main__':
